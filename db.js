@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 //srv - mongodb+srv://ssdhal98:subhranshu@12@cluster0.qcapyxu.mongodb.net/
+mongoose.connect("mongodb+srv://ssdhal98:subhranshu@12@cluster0.qcapyxu.mongodb.net/todos")
 
 const todoSchema = mongoose.Schema({
   title: String,
@@ -10,6 +11,6 @@ const todoSchema = mongoose.Schema({
 
 const todo = mongoose.model('todos',todoSchema);
 
-module.export = {
+module.exports = {
     todo
 }
