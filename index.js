@@ -24,6 +24,7 @@ app.post("/todo", async function (req, res) {
   await todo.create({
     title: createPayload.title,
     description: createPayload.title,
+    completed: false
   });
   res.json({
     msg: "todo created!",
@@ -37,7 +38,7 @@ app.get("/todos", async function (req, res) {
   })
 });
 
-app.put("/completed", function (req, res) {
+app.put("/completed", async function (req, res) {
   const createPayload = req.body;
   const parsePayload = updateTodo.safeParse(createPayload);
   if (!parsePayload) {
@@ -46,6 +47,14 @@ app.put("/completed", function (req, res) {
     });
     return;
   }
+  await todo.update({
+    _id: req.body.id
+  },{
+    completed: true
+  })
+  res.json({
+    msg: "marked as completed!"
+  })
 });
 
 app.listen(port, () => {
